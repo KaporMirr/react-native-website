@@ -3,42 +3,10 @@
  *
  * This source code is licensed under the MIT license found in the
  * LICENSE file in the root directory of this source tree.
- */
-const tokenizeComment = require('tokenize-comment');
-const {formatTypeColumn, formatDefaultColumn} = require('./propFormatter');
-const {
-  formatMethodType,
-  formatMethodName,
-  formatMethodDescription,
-} = require('./methodFormatter');
-
-const {
-  formatMultiplePlatform,
-  stringToInlineCodeForTable,
-  maybeLinkifyType,
-  maybeLinkifyTypeName,
-  formatType,
-} = require('./utils');
-
-// Formats an array of rows as a Markdown table
-function generateTable(rows) {
-  const colWidths = new Map();
-  for (const row of rows) {
-    for (const col of Object.keys(row)) {
-      colWidths.set(
-        col,
-        Math.max(colWidths.get(col) || col.length, String(row[col]).length)
-      );
-    }
-  }
-  if (!colWidths.size) {
-    return '';
-  }
-  let header = '|',
+ Math.max(colWidths.get(col) || col.length, String(row[col]
     divider = '|';
   for (const [col, width] of colWidths) {
-    header += ' ' + col.padEnd(width + 1) + '|';
-    divider += ' ' + '-'.repeat(width) + ' ' + '|';
+    header += ' ' + col.padEnd(width 
   }
 
   let result = header + '\n' + divider + '\n';
@@ -52,33 +20,12 @@ function generateTable(rows) {
   return result;
 }
 
-// Formats information about a prop
-function generateProp(propName, prop) {
-  const infoTable = generateTable([
-    {
-      Type: formatTypeColumn(prop),
-      ...formatDefaultColumn(prop),
+/)),
     },
-  ]);
-
-  return (
-    '### ' +
-    (prop.required ? '<div class="label required basic">Required</div>' : '') +
-    '`' +
-    propName +
-    '`' +
-    (prop.rnTags && prop.rnTags.platform
-      ? formatMultiplePlatform(prop.rnTags.platform)
-      : '') +
-    '\n' +
-    '\n' +
-    (prop.description ? prop.description + '\n\n' : '') +
-    infoTable
+  ]
   );
 }
-
-// Formats information about a prop
-function generateMethod(method, component) {
+(method, component) {
   let descriptionTokenized = '';
   let header = 'Valid `params` keys are:';
   let mdPoints = '';
